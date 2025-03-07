@@ -1,4 +1,5 @@
-export 'package:gms_check/gms_check.dart' show GmsCheck;
+// Temporarily disabled to fix iOS build issues
+// export 'package:gms_check/gms_check.dart' show GmsCheck;
 export 'package:inspireui/utils.dart' show HexColor, Videos, EncodeUtils;
 
 export 'extensions/extensions.dart';

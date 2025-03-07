@@ -1,4 +1,5 @@
-import 'package:facebook_app_events/facebook_app_events.dart';
+// Temporarily disabled to fix iOS build issues
+// import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,15 @@ import '../../models/order/order.dart';
 import '../../modules/analytics/abstract_analytic_trigger.dart';
 import '../models/app_model.dart';
 import '../models/product_model.dart';
+
+// Stub implementation for FacebookAppEvents
+class FacebookAppEvents {
+  void logAddToWishlist({String? id, String? type, double? price, String? currency}) {}
+  void logAddToCart({String? id, String? type, double? price, String? currency}) {}
+  void logEvent({String? name, Map<String, dynamic>? parameters}) {}
+  void logPurchase({Map<String, dynamic>? parameters, double? amount, String? currency}) {}
+  void logViewContent({String? id, String? type, double? price, Map<String, dynamic>? content}) {}
+}
 
 class MetaAppEventTracking extends AbstractAnalyticTrigger {
   final facebookAppEvents = FacebookAppEvents();

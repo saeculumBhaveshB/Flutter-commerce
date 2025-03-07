@@ -2,11 +2,27 @@ import 'dart:async';
 import 'dart:convert' as convert;
 
 import 'package:flutter/services.dart';
-import 'package:paytm_allinonesdk/paytm_allinonesdk.dart';
+// Temporarily disabled to fix iOS build issues
+// import 'package:paytm_allinonesdk/paytm_allinonesdk.dart';
 
 import '../../../common/config.dart';
 import '../../../common/constants.dart';
 import '../../../services/services.dart';
+
+// Stub implementation for paytm_allinonesdk
+class AllInOneSdk {
+  static Future<Map<dynamic, dynamic>> startTransaction(
+    String merchantId,
+    String orderId,
+    String amount,
+    String txnToken,
+    String callbackUrl,
+    bool isStaging,
+    bool restrictAppInvoke,
+  ) async {
+    return {'RESPMSG': 'Stub implementation', 'STATUS': 'PENDING'};
+  }
+}
 
 class PayTmServices {
   PayTmServices({required this.amount, required this.orderId, this.email});

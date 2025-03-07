@@ -51,12 +51,13 @@ class FirebaseServices extends BaseFirebaseServices {
 
     /// Require Play Services
     const message = '[FirebaseServices] Init successfully';
-    if (GmsCheck().isGmsAvailable) {
+    // Temporarily disabled to fix iOS build issues
+    // if (GmsCheck().isGmsAvailable) {
       _messaging = FirebaseMessaging.instance;
       printLog(message, startTime);
-    } else {
-      printLog('$message (without Google Play Services)', startTime);
-    }
+    // } else {
+    //   printLog('$message (without Google Play Services)', startTime);
+    // }
   }
 
   /// Firebase Auth
@@ -134,7 +135,8 @@ class FirebaseServices extends BaseFirebaseServices {
       {'deviceToken': token, 'isOnline': true},
       SetOptions(merge: true),
     );
-    if (GmsCheck().isGmsAvailable) {
+    // Temporarily disabled to fix iOS build issues
+    // if (GmsCheck().isGmsAvailable) {
       try {
         await Services()
             .api
@@ -142,7 +144,7 @@ class FirebaseServices extends BaseFirebaseServices {
       } catch (err, trace) {
         printError(err, trace);
       }
-    }
+    // }
   }
 
   @override

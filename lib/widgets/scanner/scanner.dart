@@ -2,13 +2,52 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flux_localization/flux_localization.dart';
 import 'package:provider/provider.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+// Temporarily disabled to fix iOS build issues
+// import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../../common/constants.dart';
 import '../../models/entities/index.dart';
 import '../../routes/flux_navigate.dart';
 import '../../screens/order_history/index.dart';
 import 'scanner_model.dart';
+
+// Stub implementation for qr_code_scanner
+class QRViewController {
+  Future<void> pauseCamera() async {}
+  Future<void> resumeCamera() async {}
+  void dispose() {}
+  Stream<Barcode> get scannedDataStream => Stream<Barcode>.empty();
+}
+
+class Barcode {
+  final String? code;
+  Barcode({this.code});
+}
+
+class QRView extends StatelessWidget {
+  final Key? key;
+  final Function(QRViewController) onQRViewCreated;
+  final Function(QRViewController, bool)? onPermissionSet;
+
+  const QRView({
+    this.key,
+    required this.onQRViewCreated,
+    this.onPermissionSet,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.black,
+      child: const Center(
+        child: Text(
+          'QR Scanner Disabled',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
 
 class Scanner extends StatelessWidget {
   final User? user;

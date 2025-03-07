@@ -107,7 +107,8 @@ void main() {
       HttpClientSetting.webProxy = Configurations.webProxy;
     }
 
-    await GmsCheck().checkGmsAvailability(enableLog: foundation.kDebugMode);
+    // Temporarily disabled to fix iOS build issues
+    // await GmsCheck().checkGmsAvailability(enableLog: foundation.kDebugMode);
 
     try {
       /// Init Firebase settings due to version 0.5.0+ requires to.

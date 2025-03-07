@@ -3,7 +3,8 @@ import 'dart:convert' as convert;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_paystack/flutter_paystack.dart';
+// Temporarily disabled to fix iOS build issues
+// import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:pay_with_paystack/pay_with_paystack.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,42 @@ import '../../../common/config.dart';
 import '../../../common/constants.dart';
 import '../../../models/app_model.dart';
 import '../../../services/services.dart';
+
+// Stub implementation for flutter_paystack
+class PaystackPlugin {
+  Future<void> initialize({required String publicKey}) async {}
+  Future<CheckoutResponse> checkout(
+    BuildContext context, {
+    required Charge charge,
+    required CheckoutMethod method,
+  }) async {
+    return CheckoutResponse(message: 'Stub implementation', reference: '', status: false);
+  }
+}
+
+class CheckoutMethod {
+  static const selectable = CheckoutMethod._();
+  const CheckoutMethod._();
+}
+
+class Charge {
+  int? amount;
+  String? accessCode;
+  String? email;
+  String? currency;
+}
+
+class CheckoutResponse {
+  final String message;
+  final String reference;
+  final bool status;
+  
+  CheckoutResponse({
+    required this.message,
+    required this.reference,
+    required this.status,
+  });
+}
 
 class PayStackObject {
   const PayStackObject({this.accessCode, this.reference});

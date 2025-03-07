@@ -1,9 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flux_localization/flux_localization.dart';
-import 'package:rate_my_app/rate_my_app.dart';
+// Temporarily disabled to fix iOS build issues
+// import 'package:rate_my_app/rate_my_app.dart';
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
+
+// Stub implementation for rate_my_app
+class RateMyApp {
+  final int minDays;
+  final int minLaunches;
+  final int remindDays;
+  final int remindLaunches;
+  final String? googlePlayIdentifier;
+  final String? appStoreIdentifier;
+  
+  bool get shouldOpenDialog => false;
+  
+  RateMyApp({
+    this.minDays = 0,
+    this.minLaunches = 0,
+    this.remindDays = 0,
+    this.remindLaunches = 0,
+    this.googlePlayIdentifier,
+    this.appStoreIdentifier,
+  });
+  
+  Future<void> init() async {}
+  
+  Future<void> showRateDialog(
+    BuildContext context, {
+    String? title,
+    String? message,
+    String? rateButton,
+    String? noButton,
+    String? laterButton,
+    Function(RateMyAppDialogButton)? listener,
+    DialogStyle? dialogStyle,
+  }) async {}
+}
+
+enum RateMyAppDialogButton { rate, later, no }
+
+class DialogStyle {
+  const DialogStyle();
+}
 
 mixin RateMyAppMixin<T extends StatefulWidget> on State<T> {
   final _rateMyApp = RateMyApp(

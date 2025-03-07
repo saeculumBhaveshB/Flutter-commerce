@@ -195,7 +195,8 @@ class AppState extends State<App>
   }
 
   void updateDeviceToken(User? user) {
-    if (GmsCheck().isGmsAvailable) {
+    // Temporarily disabled to fix iOS build issues
+    // if (GmsCheck().isGmsAvailable) {
       /// only update for login users
       if (user!.username != null) {
         Services().firebase.getMessagingToken().then((token) {
@@ -207,7 +208,7 @@ class AppState extends State<App>
           }
         });
       }
-    }
+    // }
     final notificationService = injector<NotificationService>();
     notificationService.setExternalId(user?.id);
   }
