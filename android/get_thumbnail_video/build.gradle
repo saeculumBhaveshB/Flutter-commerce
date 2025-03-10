@@ -1,0 +1,3 @@
+android {
+    namespace 'xyz.justsoft.video_thumbnail'
+} 

@@ -8,10 +8,13 @@ import 'package:flutter_localizations/src/utils/date_localizations.dart'
 import 'package:intl/intl.dart' as intl;
 
 import '../local_widgets_localizations.dart';
-import 'cupertino_ku.dart';
-import 'cupertino_ti.dart';
+// Temporarily disabled to fix build issues
+// import 'cupertino_ku.dart';
+// import 'cupertino_ti.dart';
 
-const kCustomizeSupportedLanguages = ['ku', 'ti'];
+// Temporarily disabled Kurdish and Tigrinya languages
+// const kCustomizeSupportedLanguages = ['ku', 'ti'];
+const kCustomizeSupportedLanguages = [];
 
 class SubCupertinoLocalizationsDelegate
     extends LocalizationsDelegate<CupertinoLocalizations> {
@@ -35,6 +38,8 @@ class SubCupertinoLocalizationsDelegate
     intl.DateFormat singleDigitSecondFormat,
     intl.NumberFormat decimalFormat,
   ) {
+    // Temporarily disabled to fix build issues
+    /*
     switch (locale.languageCode) {
       case 'ku':
         return CupertinoLocalizationKu(
@@ -57,6 +62,7 @@ class SubCupertinoLocalizationsDelegate
             singleDigitSecondFormat: singleDigitSecondFormat,
             decimalFormat: decimalFormat);
     }
+    */
     assert(false,
         'getCustomizeCupertinoTranslation() called for unsupported locale "$locale"');
     return null;

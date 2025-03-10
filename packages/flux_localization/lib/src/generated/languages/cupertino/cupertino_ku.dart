@@ -1,8 +1,14 @@
+// This file is temporarily disabled to fix build issues
+/*
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+import 'package:flutter/foundation.dart' show SynchronousFuture;
+import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
 
 class CupertinoLocalizationKu extends GlobalCupertinoLocalizations {
-  /// Create an instance of the translation bundle for English.
+  /// Create an instance of the translation bundle for Kurdish.
   ///
   /// For details on the meaning of the arguments, see [GlobalCupertinoLocalizations].
   const CupertinoLocalizationKu({
@@ -16,6 +22,31 @@ class CupertinoLocalizationKu extends GlobalCupertinoLocalizations {
     required super.singleDigitSecondFormat,
     required super.decimalFormat,
   });
+
+  static const LocalizationsDelegate<CupertinoLocalizations> delegate =
+      _CupertinoLocalizationKuDelegate();
+
+  /// A [LocalizationsDelegate] for Kurdish.
+  static CupertinoLocalizationKu of(BuildContext context) {
+    return Localizations.of<CupertinoLocalizationKu>(context, CupertinoLocalizationKu)!;
+  }
+
+  /// Creates an object that provides Kurdish localized strings for the Cupertino widgets.
+  static Future<CupertinoLocalizationKu> load(Locale locale) {
+    return SynchronousFuture<CupertinoLocalizationKu>(
+      CupertinoLocalizationKu(
+        localeName: 'ku',
+        fullYearFormat: intl.DateFormat('y'),
+        dayFormat: intl.DateFormat('d'),
+        mediumDateFormat: intl.DateFormat('EEE, MMM d'),
+        singleDigitHourFormat: intl.DateFormat('h a'),
+        singleDigitMinuteFormat: intl.DateFormat('m'),
+        doubleDigitMinuteFormat: intl.DateFormat('mm'),
+        singleDigitSecondFormat: intl.DateFormat('s'),
+        decimalFormat: intl.NumberFormat('#,##0.###'),
+      ),
+    );
+  }
 
   String get firstPageTooltip => '';
 
@@ -167,4 +198,24 @@ class CupertinoLocalizationKu extends GlobalCupertinoLocalizations {
 
   @override
   String get clearButtonLabel => 'Jê bibe';
+
+  String get timerListLabelMany => '';
+
+  String get timerListLabelTwo => '';
+
+  String get timerListLabelZero => '';
 }
+
+class _CupertinoLocalizationKuDelegate extends LocalizationsDelegate<CupertinoLocalizations> {
+  const _CupertinoLocalizationKuDelegate();
+
+  @override
+  bool isSupported(Locale locale) => locale.languageCode == 'ku';
+
+  @override
+  Future<CupertinoLocalizations> load(Locale locale) => CupertinoLocalizationKu.load(locale);
+
+  @override
+  bool shouldReload(_CupertinoLocalizationKuDelegate old) => false;
+}
+*/

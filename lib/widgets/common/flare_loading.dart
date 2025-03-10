@@ -1,8 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:flare_flutter/flare.dart';
-import 'package:flare_flutter/flare_actor.dart';
-import 'package:flare_flutter/flare_controller.dart';
+// Temporarily disabled Flare-Flutter imports
+// import 'package:flare_flutter/flare.dart';
+// import 'package:flare_flutter/flare_actor.dart';
+// import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -40,16 +41,13 @@ class FlareLoading extends StatefulWidget {
   FlareLoadingState createState() => FlareLoadingState();
 }
 
-class FlareLoadingState extends State<FlareLoading> with FlareController {
-  ActorAnimation? _start, _loading, _complete;
-  double _animationTime = 0.0;
+// Temporary implementation without Flare-Flutter
+class FlareLoadingState extends State<FlareLoading> {
   dynamic _data; //save data from the future for the callback
   dynamic _error; //save error from the future for the callback
   dynamic _stack; //save stack from the future for the callback
   bool _isLoading = true; //bool to know if we're still processing
   bool _isSuccessful = false; //bool to know if the until future is successful
-  bool _isCompleted = false; //bool to know if endAnimation is finished
-  bool _isIntroFinished = false; //bool to know if startAnimation is finished
   bool get isNetwork => widget.name.startsWith('http');
 
   @override
@@ -59,20 +57,11 @@ class FlareLoadingState extends State<FlareLoading> with FlareController {
     super.initState();
   }
 
-  Future<Uint8List> loadFlareNetwork() async {
-    var response = await http.get(Uri.parse(widget.name));
-    return response.bodyBytes;
-  }
-
   @override
   void didUpdateWidget(FlareLoading oldWidget) {
     if (widget.isLoading != null && widget.isLoading != oldWidget.isLoading) {
       setState(() {
         _isLoading = widget.isLoading!;
-        if (_isLoading) {
-          _isCompleted = false;
-          isActive.value = true;
-        }
       });
     }
     super.didUpdateWidget(oldWidget);
@@ -85,26 +74,9 @@ class FlareLoadingState extends State<FlareLoading> with FlareController {
       child: SizedBox(
         width: widget.width,
         height: widget.height,
-        child: isNetwork
-            ? FutureBuilder<Uint8List>(
-                future: loadFlareNetwork(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const SizedBox();
-                  }
-                  return FlareActor.memory(
-                    snapshot.data!,
-                    controller: this,
-                    fit: widget.fit,
-                    callback: (_) => {},
-                  );
-                })
-            : FlareActor(
-                widget.name,
-                controller: this,
-                fit: widget.fit,
-                callback: (_) => {},
-              ),
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }
@@ -112,6 +84,7 @@ class FlareLoadingState extends State<FlareLoading> with FlareController {
   Future _processCallback() async {
     if (widget.until == null) {
       _isSuccessful = true; //based on boolean field we're always sucessful
+      _finished();
     } else {
       try {
         _data = await widget.until!();
@@ -124,10 +97,7 @@ class FlareLoadingState extends State<FlareLoading> with FlareController {
       setState(() {
         _isLoading = false;
       });
-      if (_loading == null && _complete == null && _isIntroFinished ||
-          _isCompleted) {
-        _finished();
-      }
+      _finished();
     }
   }
 
@@ -143,69 +113,5 @@ class FlareLoadingState extends State<FlareLoading> with FlareController {
         }
       });
     }
-  }
-
-  @override
-  bool advance(FlutterActorArtboard artboard, double elapsed) {
-    _animationTime += elapsed;
-
-    if (!_isIntroFinished && _start != null) {
-      if (_animationTime < _start!.duration) {
-        // finish start animation
-        _start!.apply(_animationTime, artboard, 1.0);
-        return true;
-      } else {
-        //start animation finished
-        _isIntroFinished = true;
-        if (_loading == null && _complete == null) {
-          _isLoading = false;
-          _finished();
-          return false; // if there another animation to continue to return false
-        }
-      }
-    }
-
-    if (_isLoading && _loading != null) {
-      // Still loading...
-      _animationTime %= _loading!.duration;
-      _loading!.apply(_animationTime, artboard, 1.0);
-    } else if (_loading != null && _animationTime < _loading!.duration) {
-      // Complete, but need to finish loading animation...
-      _loading!.apply(_animationTime, artboard, 1.0);
-    } else if (_complete == null) {
-      _isLoading = false;
-      _finished();
-      return false;
-    } else if (!_isCompleted) {
-      // Chain completion animation
-      var completeTime = _animationTime - (_loading ?? _start)!.duration;
-      _complete!.apply(completeTime, artboard, 1.0);
-      if (completeTime >= _complete!.duration) {
-        // Notify we're done and stop advancing.
-        _isCompleted = true;
-        _isLoading = false;
-        _finished();
-        return false;
-      }
-    }
-    return true;
-  }
-
-  @override
-  void initialize(FlutterActorArtboard artboard) {
-    if (widget.startAnimation != null) {
-      _start = artboard.getAnimation(widget.startAnimation!);
-    }
-    if (widget.loopAnimation != null) {
-      _loading = artboard.getAnimation(widget.loopAnimation!);
-    }
-    if (widget.endAnimation != null) {
-      _complete = artboard.getAnimation(widget.endAnimation!);
-    }
-  }
-
-  @override
-  void setViewTransform(viewTransform) {
-    //nothing to do
   }
 }

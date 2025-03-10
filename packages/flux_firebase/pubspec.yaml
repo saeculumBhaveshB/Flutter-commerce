@@ -12,7 +12,7 @@ dependencies:
 
   fstore:
     path: ../../
-    
+
   inspireui: 2.2.3
   flux_ui: 0.0.1
 
@@ -21,7 +21,7 @@ dependencies:
 
   flux_localization:
     path: ../flux_localization
-    
+
   # FIREBASE PACKAGES
   firebase_core: 3.8.0
   firebase_analytics: 11.3.5
@@ -47,7 +47,7 @@ dependencies:
   intl: any
   timeago: 3.7.0
   flutter_local_notifications: 18.0.0
-  share: 2.0.4
+  share_plus: 10.1.1
   provider: 6.1.2
   collection: any
   easy_debounce: 2.0.3

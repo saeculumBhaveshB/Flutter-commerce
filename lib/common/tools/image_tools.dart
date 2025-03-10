@@ -6,9 +6,10 @@ import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_image/flutter_native_image.dart';
-import 'package:get_thumbnail_video/index.dart';
-import 'package:get_thumbnail_video/video_thumbnail.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+// Temporarily disabled due to namespace issues with Android Gradle Plugin 8.3.1
+// import 'package:get_thumbnail_video/index.dart';
+// import 'package:get_thumbnail_video/video_thumbnail.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:inspireui/utils/logs.dart';
@@ -220,26 +221,29 @@ class ImageTools {
         } else {
           tmpFile = await writeToFile(image.readAsBytesSync());
         }
-        final compressedFile = await FlutterNativeImage.compressImage(
+        
+        final result = await FlutterImageCompress.compressWithFile(
           tmpFile.path,
-          percentage: percentage,
           quality: quality,
         );
-        final bytes = compressedFile.readAsBytesSync();
-        base64 += base64Encode(bytes);
+        
+        if (result != null) {
+          base64 += base64Encode(result);
+        }
       } catch (e) {
         printError(e);
       }
     }
 
     if (image is XFile) {
-      final compressedFile = await FlutterNativeImage.compressImage(
+      final result = await FlutterImageCompress.compressWithFile(
         image.path,
-        percentage: percentage,
         quality: quality,
       );
-      final bytes = compressedFile.readAsBytesSync();
-      base64 += base64Encode(bytes);
+      
+      if (result != null) {
+        base64 += base64Encode(result);
+      }
     }
 
     if (image is String) {
@@ -268,14 +272,19 @@ class ImageTools {
     int quality = 75,
   }) async {
     try {
-      final thumbnailPath = await VideoThumbnail.thumbnailData(
-        video: videoPath,
-        imageFormat: ImageFormat.WEBP,
-        maxWidth: maxWidth?.round() ?? 64,
-        maxHeight: maxHeight?.round() ?? 64,
-        quality: quality,
-      );
-      return thumbnailPath;
+      // Temporarily disabled due to namespace issues with Android Gradle Plugin 8.3.1
+      // final thumbnailPath = await VideoThumbnail.thumbnailData(
+      //   video: videoPath,
+      //   imageFormat: ImageFormat.WEBP,
+      //   maxWidth: maxWidth?.round() ?? 64,
+      //   maxHeight: maxHeight?.round() ?? 64,
+      //   quality: quality,
+      // );
+      // return thumbnailPath;
+      
+      // Return null as a temporary solution
+      printLog('Video thumbnail generation is temporarily disabled');
+      return null;
     } catch (e) {
       return null;
     }

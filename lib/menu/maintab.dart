@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:flux_localization/flux_localization.dart';
 import 'package:inspireui/inspireui.dart';
-import 'package:new_version_plus/new_version_plus.dart';
+// import 'package:new_version_plus/new_version_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../common/config.dart';
@@ -106,14 +106,7 @@ class MainTabsState extends CustomOverlayState<MainTabs>
     if (isAndroid && kAdvanceConfig.inAppUpdateForAndroid.enable) {
       InAppUpdateForAndroid().checkForUpdate();
     } else if (kAdvanceConfig.versionCheck.enable) {
-      final versionCheck = kAdvanceConfig.versionCheck;
-      final newVersion = NewVersionPlus(
-        iOSId: versionCheck.iosId,
-        iOSAppStoreCountry: versionCheck.iOSAppStoreCountry,
-        androidId: versionCheck.androidId,
-        androidPlayStoreCountry: versionCheck.androidPlayStoreCountry,
-      );
-      newVersion.showAlertIfNecessary(context: context);
+      _checkVersion();
     }
 
     if (appSetting.ageRestrictionConfig.enable &&
@@ -381,6 +374,36 @@ class MainTabsState extends CustomOverlayState<MainTabs>
         ),
       );
     });
+  }
+
+  void _checkVersion() async {
+    // Temporarily disabled due to package issues
+    /*
+    final newVersion = NewVersionPlus(
+      iOSId: kAdvanceConfig.iOSId,
+      androidId: kAdvanceConfig.androidPackageName,
+    );
+    
+    try {
+      final status = await newVersion.getVersionStatus();
+      if (status != null && status.canUpdate) {
+        newVersion.showUpdateDialog(
+          context: context,
+          versionStatus: status,
+          dialogTitle: S.of(context).updateDialogTitle,
+          dialogText: sprintf(S.of(context).updateDialogContent, [
+            status.localVersion,
+            status.storeVersion,
+          ]),
+          updateButtonText: S.of(context).updateButtonText,
+          dismissButtonText: S.of(context).later,
+          dismissAction: () => Navigator.of(context).pop(),
+        );
+      }
+    } catch (e) {
+      printLog('[_checkVersion] error: $e');
+    }
+    */
   }
 }
 

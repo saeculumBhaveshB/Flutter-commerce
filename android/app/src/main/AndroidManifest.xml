@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.inspireui.fluxstore">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +13,6 @@
 
     <!-- Use for showing notification -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
 
     <!-- Use for take photo and photo gallery feature -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -79,7 +77,6 @@
         android:name="${applicationName}"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:extractNativeLibs="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/launcher_icon"
         android:label="@string/app_name"

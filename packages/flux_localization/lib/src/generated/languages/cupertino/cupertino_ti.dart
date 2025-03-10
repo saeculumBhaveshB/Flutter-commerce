@@ -1,8 +1,14 @@
+// This file is temporarily disabled to fix build issues
+/*
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+import 'package:flutter/foundation.dart' show SynchronousFuture;
+import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
 
 class CupertinoLocalizationTi extends GlobalCupertinoLocalizations {
-  /// Create an instance of the translation bundle for English.
+  /// Create an instance of the translation bundle for Tigrinya.
   ///
   /// For details on the meaning of the arguments, see [GlobalCupertinoLocalizations].
   const CupertinoLocalizationTi({
@@ -16,6 +22,31 @@ class CupertinoLocalizationTi extends GlobalCupertinoLocalizations {
     required super.singleDigitSecondFormat,
     required super.decimalFormat,
   });
+
+  static const LocalizationsDelegate<CupertinoLocalizations> delegate =
+      _CupertinoLocalizationTiDelegate();
+
+  /// A [LocalizationsDelegate] for Tigrinya.
+  static CupertinoLocalizationTi of(BuildContext context) {
+    return Localizations.of<CupertinoLocalizationTi>(context, CupertinoLocalizationTi)!;
+  }
+
+  /// Creates an object that provides Tigrinya localized strings for the Cupertino widgets.
+  static Future<CupertinoLocalizationTi> load(Locale locale) {
+    return SynchronousFuture<CupertinoLocalizationTi>(
+      CupertinoLocalizationTi(
+        localeName: 'ti',
+        fullYearFormat: intl.DateFormat('y'),
+        dayFormat: intl.DateFormat('d'),
+        mediumDateFormat: intl.DateFormat('EEE, MMM d'),
+        singleDigitHourFormat: intl.DateFormat('h a'),
+        singleDigitMinuteFormat: intl.DateFormat('m'),
+        doubleDigitMinuteFormat: intl.DateFormat('mm'),
+        singleDigitSecondFormat: intl.DateFormat('s'),
+        decimalFormat: intl.NumberFormat('#,##0.###'),
+      ),
+    );
+  }
 
   String get firstPageTooltip => '';
 
@@ -167,4 +198,24 @@ class CupertinoLocalizationTi extends GlobalCupertinoLocalizations {
 
   @override
   String get clearButtonLabel => 'ማስታወሻ';
+
+  String get timerListLabelMany => '';
+
+  String get timerListLabelTwo => '';
+
+  String get timerListLabelZero => '';
 }
+
+class _CupertinoLocalizationTiDelegate extends LocalizationsDelegate<CupertinoLocalizations> {
+  const _CupertinoLocalizationTiDelegate();
+
+  @override
+  bool isSupported(Locale locale) => locale.languageCode == 'ti';
+
+  @override
+  Future<CupertinoLocalizations> load(Locale locale) => CupertinoLocalizationTi.load(locale);
+
+  @override
+  bool shouldReload(_CupertinoLocalizationTiDelegate old) => false;
+}
+*/

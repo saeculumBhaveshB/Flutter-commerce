@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "/Users/saeculummac_1/development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/saeculummac_1/Library/Android/sdk/cmake/3.18.1/bin/ninja",
+      "-C",
+      "/Users/saeculummac_1/git/seaculum/Flutter-commerce/android/app/.cxx/Debug/5u181d4b/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/saeculummac_1/Library/Android/sdk/cmake/3.18.1/bin/ninja",
+    "-C",
+    "/Users/saeculummac_1/git/seaculum/Flutter-commerce/android/app/.cxx/Debug/5u181d4b/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/saeculummac_1/Library/Android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/saeculummac_1/Library/Android/sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}
